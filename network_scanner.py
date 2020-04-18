@@ -32,5 +32,5 @@ def get_arguments():
 
 opt = get_arguments()
 if opt.ip is None:
-    opt.ip = input("Input IP-address or range of IP-addresses: ")
+    opt.ip = input("Enter IP-address or range of IP-addresses: ")
 print_clients(scan(opt.ip))
