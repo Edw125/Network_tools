@@ -5,6 +5,7 @@ import optparse
 
 
 def scan(ip):
+    """The function scans network"""
     arp_request = ARP(pdst=ip)
     broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
     package = broadcast / arp_request
@@ -17,6 +18,7 @@ def scan(ip):
 
 
 def print_clients(clients_list):
+    """The function outputs discovered IP and MAC-addresses to the terminal"""
     print("IP\t\t\t\tMAC-address")
     print("-" * 50)
     for element in clients_list:
@@ -24,13 +26,15 @@ def print_clients(clients_list):
 
 
 def get_arguments():
+    """The function accepts arguments from the terminal"""
     parser = optparse.OptionParser()
     parser.add_option("-t", "--target", dest="ip", help="Target IP-address or range of IP-addresses")
     (options, arguments) = parser.parse_args()
     return options
 
 
-opt = get_arguments()
-if opt.ip is None:
-    opt.ip = input("Enter IP-address or range of IP-addresses: ")
-print_clients(scan(opt.ip))
+if __name__ == "__main__":
+    args = get_arguments()
+    if args.ip is None:
+        args.ip = input("Enter IP-address or range of IP-addresses: ")
+    print_clients(scan(args.ip))
