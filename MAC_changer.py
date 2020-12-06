@@ -59,15 +59,19 @@ if __name__ == "__main__":
     current_mac = get_current_mac(args.interface)
     print("Current MAC-address: " + str(current_mac))
     answer = input("Do you want to change MAC-address to random? (yes/no): ")
+
     if answer == 'yes':
         args.new_mac = get_random_mac()
         change_mac(args.interface, args.new_mac)
+
     elif answer == 'no':
         if args.new_mac is None:
             args.new_mac = input("Enter MAC-address: ")
         change_mac(args.interface, args.new_mac)
     current_mac = get_current_mac(args.interface)
+
     if current_mac == args.new_mac:
         print("MAC-address was successfully changed to " + current_mac)
+
     else:
         print("MAC-address didn't get changed")
